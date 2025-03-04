@@ -17,7 +17,7 @@ class Contact extends Model
         'homephone',
         'email',
         'created_by_id',
-        'created_date'
+        'created_date',
     ];
 
     protected $casts = [
@@ -25,7 +25,7 @@ class Contact extends Model
         'created_date' => 'datetime',
     ];
 
-    public function creator()
+    public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by_id');
     }

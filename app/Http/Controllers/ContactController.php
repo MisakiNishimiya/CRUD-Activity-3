@@ -8,17 +8,26 @@ use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
+/**
+     * Display a listing of the contacts.
+     */
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Contact::latest()->paginate(10);
         return view('contacts.index', compact('contacts'));
     }
 
+    /**
+     * Show the form for creating a new contact.
+     */
     public function create()
     {
         return view('contacts.create');
     }
 
+    /**
+     * Store a newly created contact in storage.
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -27,7 +36,7 @@ class ContactController extends Controller
             'birthdate' => 'required|date',
             'workphone' => 'nullable|string|max:20',
             'homephone' => 'nullable|string|max:20',
-            'email' => 'required|email|unique:contacts,email',
+            'email' => 'required|string|email|max:255|unique:contacts',
         ]);
 
         Contact::create([
@@ -45,16 +54,25 @@ class ContactController extends Controller
             ->with('success', 'Contact created successfully.');
     }
 
+    /**
+     * Display the specified contact.
+     */
     public function show(Contact $contact)
     {
         return view('contacts.show', compact('contact'));
     }
 
+    /**
+     * Show the form for editing the specified contact.
+     */
     public function edit(Contact $contact)
     {
         return view('contacts.edit', compact('contact'));
     }
 
+    /**
+     * Update the specified contact in storage.
+     */
     public function update(Request $request, Contact $contact)
     {
         $request->validate([
@@ -63,7 +81,7 @@ class ContactController extends Controller
             'birthdate' => 'required|date',
             'workphone' => 'nullable|string|max:20',
             'homephone' => 'nullable|string|max:20',
-            'email' => 'required|email|unique:contacts,email,' . $contact->id,
+            'email' => 'required|string|email|max:255|unique:contacts,email,' . $contact->id,
         ]);
 
         $contact->update([
@@ -78,7 +96,9 @@ class ContactController extends Controller
         return redirect()->route('contacts.index')
             ->with('success', 'Contact updated successfully.');
     }
-
+    /**
+     * Remove the specified contact from storage.
+     */
     public function destroy(Contact $contact)
     {
         $contact->delete();

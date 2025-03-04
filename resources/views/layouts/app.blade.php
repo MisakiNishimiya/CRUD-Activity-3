@@ -13,6 +13,31 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- Include Tailwind CSS via CDN (for quick setup) -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- Include Font Awesome for icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+        <!-- Custom styles -->
+        <style>
+            .fade-in {
+                animation: fadeIn 0.5s;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            .hover-scale {
+                transition: transform 0.2s;
+            }
+            
+            .hover-scale:hover {
+                transform: scale(1.02);
+            }
+        </style>
+    
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -29,7 +54,7 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                @yield('content')
             </main>
         </div>
     </body>
