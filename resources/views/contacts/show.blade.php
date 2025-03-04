@@ -74,6 +74,10 @@
                         <h3 class="text-sm font-medium text-gray-500">Created Date</h3>
                         <p class="mt-1 text-base text-gray-900">{{ $contact->created_date->format('F d, Y H:i:s') }}</p>
                     </div>
+                    <div class="mb-4">
+                        <h3 class="text-sm font-medium text-gray-500">Updated at</h3>
+                        <p class="mt-1 text-base text-gray-900">{{ $contact->updated_at->format('F d, Y H:i:s') }}</p>
+                    </div>
                 </div>
             </div>
         </div>
